@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
 from util.tests.global_setup import GlobalTestSetUp
-from .mockdata import user_level_mockdata1, difficulty_mockdata1, create_difficulty_mock, create_user_level_mock
+from .test_mockdata import user_level_mockdata1, difficulty_mockdata1, create_difficulty_mock, create_user_level_mock
 
 
 class TestUserLevelViewCase(GlobalTestSetUp, APITestCase):

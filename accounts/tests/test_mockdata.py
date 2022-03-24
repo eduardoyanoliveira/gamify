@@ -16,6 +16,15 @@ user_mockdata2 = {
     "password": 'test25'
 }
 
+super_mockdata = {
+    "user_name": 'super2',
+    "email" : 'test@super',
+    "password": 'SW@master35',
+    "is_superuser": True,
+    "is_active": True
+}
+        
+
 def create_user_mock(user_mockdata) -> CustomUser:
     return CustomUser.objects.create(
         user_name= user_mockdata['user_name'],
@@ -25,3 +34,12 @@ def create_user_mock(user_mockdata) -> CustomUser:
         password = user_mockdata['password']
     )
 
+
+def create_super_mock(super_mockdata) -> CustomUser:
+    return CustomUser.objects.create_user(
+        user_name = super_mockdata['user_name'],
+        email= super_mockdata['email'],
+        password = super_mockdata['password'],
+        is_superuser= super_mockdata['is_superuser'],
+        is_active = super_mockdata['is_active']
+    )

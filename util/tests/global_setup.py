@@ -1,5 +1,5 @@
 from django.test import TestCase
-from accounts.tests.mockdata import user_mockdata1, user_mockdata2, create_user_mock
+from accounts.tests.test_mockdata import user_mockdata1, user_mockdata2, create_user_mock
 
 class GlobalTestSetUp(TestCase):
     

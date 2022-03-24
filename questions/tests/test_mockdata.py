@@ -1,4 +1,4 @@
-from game_config.tests.mockdata import difficulty_mockdata1, create_difficulty_mock
+from game_config.tests.test_mockdata import difficulty_mockdata1, create_difficulty_mock
 from accounts.models import CustomUser
 from ..models import Answer, Question
 

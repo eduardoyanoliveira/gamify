@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from ..models import CustomUser
 
+
 class CustomUserSerialzier(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
@@ -13,7 +14,8 @@ class CustomUserSerialzier(serializers.ModelSerializer):
         model = CustomUser
         fields = '__all__'
         extra_kwargs = {'password': {'write_only': True}}
-
+      
+        
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         # as long as the fields are the same, we can just use this

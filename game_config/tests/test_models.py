@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .mockdata import difficulty_mockdata1, user_level_mockdata1, create_difficulty_mock, create_user_level_mock
+from .test_mockdata import difficulty_mockdata1, user_level_mockdata1, create_difficulty_mock, create_user_level_mock
 from ..models import UserLevel, Difficulty
 
 # UserLevel Tests
@@ -8,18 +8,7 @@ class TestUserLevelCase(TestCase):
     def setUp(self) -> None:
         create_user_level_mock(user_level_mockdata1)
     
-    
-    def test_if_exists(self) -> None:
-        user_level_count = UserLevel.objects.count()
-        self.assertEqual(user_level_count, 1)
-        self.assertNotEqual(user_level_count, 0)
-       
-        
-    def test_instance(self) -> None:
-        user_level = UserLevel.objects.get(id=1)
-        self.assertTrue(isinstance(user_level, UserLevel))
-        
-    
+
     def test_str(self) -> None:
         user_level = UserLevel.objects.get(id=1)
         self.assertEqual(str(user_level), user_level_mockdata1['name'])  
@@ -48,17 +37,6 @@ class TestDifficultyCase(TestCase):
     def setUp(self) -> None:
         create_difficulty_mock(difficulty_mockdata1)
       
-        
-    def test_if_exists(self) -> None:
-        difficulty_count = Difficulty.objects.count()
-        self.assertEqual(difficulty_count, 1)
-        self.assertNotEqual(difficulty_count, 0)
-    
-    
-    def test_instance(self) -> None:
-        difficulty = Difficulty.objects.get(id=1)
-        self.assertTrue(isinstance(difficulty, Difficulty))
-        
     
     def test_create(self) -> None:
         difficulty = Difficulty.objects.get(id=1)

@@ -2,9 +2,12 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from subjects.models import Content, Keyword, Subject
-from .mockdata import subject_mockdata1, create_subject_mock
-from .mockdata import content_mockdata1, create_content_mock
-from .mockdata import keyword_mockdata1, create_keyword_mock
+
+from .test_mockdata import subject_mockdata1, create_subject_mock
+from .test_mockdata import content_mockdata1, create_content_mock
+from .test_mockdata import keyword_mockdata1, create_keyword_mock
+
+from accounts.tests.test_mockdata import super_mockdata, create_super_mock
 
 
 class TestSubjectViewCase(APITestCase):
@@ -12,15 +15,36 @@ class TestSubjectViewCase(APITestCase):
     url = '/api/subjects/'
     
     def setUp(self) -> None:
+        create_super_mock(super_mockdata)
+        
+        self.user_name= super_mockdata['user_name']
+        self.password = super_mockdata['password']
+        
         create_subject_mock(subject_mockdata1)
-    
-    
+
+
     def test_view(self) -> None:
         response = self.client.get(TestSubjectViewCase.url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
     
+    def test_create_fail_no_auth(self) -> None:
+        """
+        Must be a super user
+        """
+        subject = Subject.objects.get(id=1)
+
+        data = {
+            "name" : subject.name,
+        }
+
+        response = self.client.post(TestSubjectViewCase.url, data, format='json')
+        self.assertTrue(response.status_code in [status.HTTP_403_FORBIDDEN, status.HTTP_401_UNAUTHORIZED])
+
+
     def test_create_view(self) -> None:
+        
+        self.client.login(user_name=self.user_name, password=self.password)
         
         subject = Subject.objects.get(id=1)
 
@@ -33,6 +57,9 @@ class TestSubjectViewCase(APITestCase):
 
 
     def test_delete_view(self) -> None:
+        
+        self.client.login(user_name=self.user_name, password=self.password)
+        
         response = self.client.delete(TestSubjectViewCase.url + '1/', content_type='application/json')
         self.assertTrue(response.status_code in [status.HTTP_200_OK, status.HTTP_204_NO_CONTENT])
 

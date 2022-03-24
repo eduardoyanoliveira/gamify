@@ -2,7 +2,7 @@ from rest_framework import status
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from util.tests.global_setup import GlobalTestSetUp
-from .mockdata import question_mockdata1, create_question_mock, answer_mockdata1, create_answer_mock
+from .test_mockdata import question_mockdata1, create_question_mock, answer_mockdata1, create_answer_mock
 
 
 class TestQuestionViewCase(GlobalTestSetUp, APITestCase):

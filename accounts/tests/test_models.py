@@ -1,24 +1,13 @@
 from ..models import CustomUser
-from .mockdata import user_mockdata1, user_mockdata2
+from .test_mockdata import user_mockdata1, user_mockdata2
 from util.tests.global_setup import GlobalTestSetUp
 
 class TestUserCase(GlobalTestSetUp):
     
     def setUp(self) -> None:
         super().setUp()
-    
-    
-    def test_if_exists(self) -> None:
-        user_count = CustomUser.objects.count()
-        self.assertEqual(user_count, 2)
-        self.assertNotEqual(user_count, 0) 
-        
-    
-    def test_instance(self) -> None:
-        user = CustomUser.objects.get(id=1)
-        self.assertTrue(isinstance(user, CustomUser))
-    
-    
+
+
     def test_create(self) -> None:
         user = CustomUser.objects.get(id=1)
         user_name = user.user_name

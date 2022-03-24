@@ -1,6 +1,6 @@
 from util.tests.global_setup import GlobalTestSetUp
 from ..models import Question, Answer
-from .mockdata import question_mockdata1, create_question_mock, answer_mockdata1, create_answer_mock
+from .test_mockdata import question_mockdata1, create_question_mock, answer_mockdata1, create_answer_mock
 
 
 # Question Tests
@@ -8,18 +8,7 @@ class TestQuestionCase(GlobalTestSetUp):
     def setUp(self):
         super().setUp()
         create_question_mock(question_mockdata1)
-
-
-    def test_if_exists(self) -> None:
-        question_count = Question.objects.count()
-        self.assertEqual(question_count, 1)
-        self.assertNotEqual(question_count, 0)
-    
-    
-    def test_instance(self) -> None:
-        question = Question.objects.get(id=1)
-        self.assertTrue(isinstance(question, Question))
-       
+ 
     
     def test_create(self) -> None:
         question = Question.objects.get(id=1)
@@ -58,18 +47,7 @@ class TestAnswerCase(GlobalTestSetUp):
     def setUp(self) -> None:
         super().setUp()
         create_answer_mock(answer_mockdata1)
-    
-    
-    def test_if_exists(self) -> None:
-        answer_count = Answer.objects.count()
-        self.assertEqual(answer_count, 1)
-        self.assertNotEqual(answer_count, 0)
-    
-         
-    def test_instance(self) -> None:
-        answer = Answer.objects.get(id=1)
-        self.assertTrue(isinstance(answer, Answer))
-       
+      
         
     def test_create(self) -> None:
         answer = Answer.objects.get(id=1)
